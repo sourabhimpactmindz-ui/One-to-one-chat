@@ -1,0 +1,34 @@
+import mongoose from "mongoose";
+
+const messageSchema = new mongoose.Schema(
+    {
+       chatid :{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "Chat",
+        require : true
+       },
+
+       senderid :{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "User",
+        require : true
+       },
+
+       text : {
+       type : String,
+       require : true
+
+       },
+         readBy : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : "User",
+        }
+    ]
+    }
+
+  
+,{timestamps : true})
+
+
+export const Message = new mongoose.model('Message',messageSchema)

@@ -1,45 +1,38 @@
-import React, { useEffect, useState } from 'react'
-import { accesschats, fatchchats } from '../service/userservice/userservice'
+import React, { useEffect, useState } from "react";
+import { accesschats, fatchchats } from "../service/userservice/userservice";
 
-export const Chat=() =>{
-  const [chats,setchats] = useState([])
-  const [selectedChat,setselectedchat] =useState(null)
+export const Chat = () => {
+  const [chats, setchats] = useState([]);
+  const [selectedChat, setselectedchat] = useState(null);
 
-    useEffect(() =>{
-      const loadchats = async() =>{
-        try{
-        const res = await fatchchats()
-        setchats(res)
-      }catch(err){
-      console.log(err)
-    }
-    }
-    loadchats()
-
-    },[])
-
-  
-    const handlechat = async(userId) =>{
-      try{
-
-        const chat = await accesschats({userId})
-        setselectedchat(chat)
-
-        if((c) => c.id == chat._id){
-          setselectedchat([chat , ...chats])
-        }
-
-
-      }catch(err){
-        console.log(err)
+  useEffect(() => {
+    const loadchats = async () => {
+      try {
+        const res = await fatchchats();
+        setchats(res);
+      } catch (err) {
+        console.log(err);
       }
-    }
+    };
+    loadchats();
+  }, []);
 
+  const handlechat = async (userId) => {
+    try {
+      const chat = await accesschats({ userId });
+      setselectedchat(chat);
+
+      const exists = chats.find((c) => c._id === chat._id);
+      if (!exists) {
+        setchats([chat, ...chats]);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
-   <div className="chat-app">
-      
-     
+    <div className="chat-app">
       <div className="sidebar">
         <div className="sidebar-header">
           <h3>Chats</h3>
@@ -47,7 +40,7 @@ export const Chat=() =>{
 
         <div className="chat-list">
           {chats.map((chat) => {
-            const otherUser = chat.users.find(u => u._id !== myId)
+            const otherUser = chat.users.find((u) => u._id !== myId);
 
             return (
               <div
@@ -72,31 +65,21 @@ export const Chat=() =>{
                     : ""}
                 </span>
               </div>
-            )
+            );
           })}
         </div>
       </div>
 
-
       <div className="chat-window">
         {selectedChat ? (
           <>
-
             <div className="chat-header">
               <div className="avatar">
-                {
-                  selectedChat.users
-                    .find(u => u._id !== myId)
-                    ?.name?.charAt(0)
-                }
+                {selectedChat.users
+                  .find((u) => u._id !== myId)
+                  ?.name?.charAt(0)}
               </div>
-              <h4>
-                {
-                  selectedChat.users
-                    .find(u => u._id !== myId)
-                    ?.name
-                }
-              </h4>
+              <h4>{selectedChat.users.find((u) => u._id !== myId)?.name}</h4>
             </div>
 
             <div className="messages">
@@ -128,7 +111,7 @@ export const Chat=() =>{
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Chat
+export default Chat;

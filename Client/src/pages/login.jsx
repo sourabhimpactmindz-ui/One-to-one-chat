@@ -40,7 +40,7 @@ const Login = () => {
               placeholder="Enter username"
               value={form.name}
               onChange={handleinput}
-            />
+           required />
           </div>
 
           <div className="input-group">
@@ -51,7 +51,7 @@ const Login = () => {
               placeholder="Enter password"
               value={form.password}
               onChange={handleinput}
-            />
+            required />
           </div>
 
           <button type="submit">Login</button>

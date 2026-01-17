@@ -3,7 +3,10 @@ import axios from 'axios'
 
 const axiosinstance = axios.create({
     baseURL : 'http://localhost:5001/api',
-    withCredentials : true
+    withCredentials : true,
+     headers: {
+    "Content-Type": "application/json", 
+  },
 })
 
 axiosinstance.interceptors.request.use(

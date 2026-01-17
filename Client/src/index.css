@@ -238,156 +238,162 @@ button:hover {
 }
 
 /* ================= CHAT PAGE ================= */
-
-.chat-app {
-  display: flex;
-  width: 100vw;       /* FULL WIDTH */
-  height: 100vh;      /* FULL HEIGHT */
-  background-color: #f0f2f5;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
-/* ===== SIDEBAR ===== */
+/* MAIN */
+.chat-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background: #f0f2f5;
+}
+
+/* SIDEBAR */
 .sidebar {
-  width: 30%;
-  min-width: 320px;
-  background-color: #ffffff;
+  width: 330px;
+  background: #fff;
   border-right: 1px solid #ddd;
   display: flex;
   flex-direction: column;
 }
 
 .sidebar-header {
-  padding: 18px 20px;
-  background-color: #075e54;
-  color: white;
-}
-
-.chat-list {
-  overflow-y: auto;
-  padding: 6px 0;
-}
-
-.chat-item {
+  height: 60px;
+  background: #075e54;
+  color: #fff;
   display: flex;
   align-items: center;
-  padding: 14px 18px;
+  padding: 0 16px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.chat-user {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
   cursor: pointer;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f1f1f1;
 }
 
-.chat-item:hover {
-  background-color: #f0f2f5;
+.chat-user:hover {
+  background: #f5f6f6;
 }
 
-.chat-item.active {
-  background-color: #e6f7f5;
+.user-info h4 {
+  font-size: 15px;
 }
 
-/* ===== AVATAR ===== */
+.user-info p {
+  font-size: 12px;
+  color: gray;
+}
+
+/* AVATAR */
 .avatar {
-  width: 46px;
-  height: 46px;
-  background-color: #25d366;
-  color: white;
+  height: 40px;
+  width: 40px;
+  background: #25d366;
+  color: #fff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  margin-right: 14px;
 }
 
-.chat-info {
-  flex: 1;
-}
-
-.chat-info h4 {
-  font-size: 16px;
-}
-
-.chat-info p {
-  font-size: 13px;
-  color: gray;
-}
-
-.time {
-  font-size: 12px;
-  color: gray;
-}
-
-/* ===== CHAT WINDOW ===== */
+/* CHAT WINDOW */
 .chat-window {
-  width: 70%;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: #efeae2;
+  background: #efeae2;
+  height: 100vh;
 }
 
 /* HEADER */
 .chat-header {
+  height: 60px;
+  background: #075e54;
+  color: white;
   display: flex;
   align-items: center;
-  padding: 18px 22px;
-  background-color: #075e54;
-  color: white;
+  gap: 12px;
+  padding: 0 16px;
+  flex-shrink: 0;
 }
 
-.chat-header .avatar {
-  margin-right: 12px;
-}
-
-/* ===== MESSAGES ===== */
+/* MESSAGES */
 .messages {
   flex: 1;
-  padding: 25px 40px;
+  padding: 20px;
   overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  align-items: stretch; /* ⭐ IMPORTANT */
 }
 
-/* MESSAGE BUBBLE */
+/* MESSAGE */
 .message {
-  max-width: 60%;
-  padding: 12px 16px;
+  max-width: 65%;
+  padding: 8px 12px;
   border-radius: 8px;
-  margin-bottom: 12px;
   font-size: 14px;
+  word-wrap: break-word;
 }
 
-.message.received {
-  background-color: #ffffff;
-  align-self: flex-start;
-}
-
+/* SENT (RIGHT) */
 .message.sent {
-  background-color: #dcf8c6;
   align-self: flex-end;
-  margin-left: auto;
+  background: #d9fdd3;
+  border-top-right-radius: 0;
 }
 
-/* ===== INPUT ===== */
+/* RECEIVED (LEFT) */
+.message.received {
+  align-self: flex-start;
+  background: #ffffff;
+  border-top-left-radius: 0;
+}
+
+/* INPUT */
 .message-input {
   display: flex;
-  padding: 14px 20px;
-  background-color: #f0f2f5;
+  align-items: center;
+  padding: 10px;
+  background: #f0f2f5;
+  gap: 10px;
+
+  position: sticky;
+  bottom: 0;
+  flex-shrink: 0;
 }
 
 .message-input input {
   flex: 1;
-  padding: 12px 16px;
+  padding: 10px 15px;
   border-radius: 20px;
-  border: 1px solid #ccc;
+  border: none;
   outline: none;
 }
 
 .message-input button {
-  margin-left: 12px;
-  padding: 12px 22px;
+  width: 42px;
+  height: 42px;
+  background: #25d366;
   border: none;
-  border-radius: 20px;
-  background-color: #25d366;
+  border-radius: 50%;
   color: white;
   cursor: pointer;
-}
 
-.message-input button:hover {
-  background-color: #1da851;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

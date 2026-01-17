@@ -11,13 +11,29 @@ export const loginuser =  async(data) =>{
     return response.data
 }
 
-
-export const accesschats = async(data) =>{
-    let response = await axiosinstance.post("/chat",data)
+export const userGet = async() =>{
+    let response = await axiosinstance.get("/get")
     return response.data
 }
 
-export const fatchchats = async(data) =>{
-    let response = await axiosinstance.post("/chat",data)
+
+export const accesschats = async({userId}) =>{
+    let response = await axiosinstance.post("/chat/access",{userId})
+    return response.data
+}
+
+export const fatchchats = async() =>{
+    let response = await axiosinstance.get("/chat")
+    return response.data
+}
+
+
+export const Sendmessage = async(data) =>{
+    let response = await axiosinstance.post("/chat/message",data)
+    return response.data
+}
+
+export const getMessage = async(chatId) =>{
+    let response = await axiosinstance.get(`/chat/message/${chatId}`)
     return response.data
 }

@@ -18,13 +18,11 @@ export const socketIo = (server) => {
     socket.join(userId)
 
     console.log(`user ${userId} join the private room`)
+ socket.on("sendMessage", ({ message, receiverId }) => {
+      if (!receiverId || !message) return;
 
-    socket.on("sendMessage", ({recevierId , message}) =>{
-        io.to(recevierId).emit("recevieMessage" ,{
-            sender : userId,
-            message
-        })
-    })
+      socket.to(receiverId).emit("receiveMessage", message);
+    });
 
     socket.on("disconnect", () => {
       console.log("user disconnected", socket.id);

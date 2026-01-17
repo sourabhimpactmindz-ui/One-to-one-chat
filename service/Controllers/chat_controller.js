@@ -1,8 +1,11 @@
 import { Chat } from "../Model/chat_model.js";
 
+
+
+
 export const Acesschat = async(req,res) =>{
-    const {userId} = req.body;
-    const myId = req.user.id
+      const myId = req.userid;         
+     const userId = req.body?.userId;
 
     try{
 
@@ -12,7 +15,7 @@ export const Acesschat = async(req,res) =>{
 
     const chat = await Chat.findOne({
         isgroupchat : false,
-        users : {$all : {myId , userId}},
+        users: { $all: [myId, userId] }
 
     }).populate('users' , '-password')
 
@@ -21,7 +24,8 @@ export const Acesschat = async(req,res) =>{
     }
 
     const newchat = await Chat.create({
-        users : [userId,myId]
+        users : [userId,myId],
+         isgroupchat : false
     })
 
     const fullChat = await Chat.findById(newchat._id).populate(
@@ -39,11 +43,11 @@ export const Acesschat = async(req,res) =>{
 // login user all chats ==> Frontend 
 
 export const Fetchchat = async(req,res) =>{
-    const {myId} = req.user.id
+    const myId = req.userid
 
     try{
         const chats = await Chat.find({
-            users : {$in : {myId}}
+            users : {$in : [myId]}
         }).populate('users',"-password").populate('lastmessage')
 
         return res.status(200).json(chats)

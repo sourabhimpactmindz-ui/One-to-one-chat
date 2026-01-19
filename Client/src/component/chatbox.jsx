@@ -65,8 +65,13 @@ export const Chatbox = ({ selectedUser, chatId }) => {
 
      <div className="messages">
   {messages.map((msg) => {
-    const isSender =
-      msg.SenderId?.toString() === loggedUserId 
+    const senderId =
+  typeof msg.SenderId === "object"
+    ? msg.SenderId._id
+    : msg.SenderId;
+
+const isSender = senderId?.toString() === loggedUserId?.toString();
+
     return (
       <div
         key={msg._id}

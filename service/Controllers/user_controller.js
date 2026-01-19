@@ -40,7 +40,7 @@ export const loginuser = async(req,res) =>{
             return res.status(404).json({message:"user not found!!",status:false})
         }
 
-        const isvalidpassword = bcrypt.compare(password,user.password)
+        const isvalidpassword = await bcrypt.compare(password,user.password)
         if(!isvalidpassword){
             return res.status(404).json({message:"password incorrect !!",status:false})
 
@@ -54,7 +54,10 @@ export const loginuser = async(req,res) =>{
             process.env.SECRET_KEY,
             {expiresIn : "2d"}
         )
-        return res.status(200).json({message:"user login successfully",status:true,token:token , })
+        return res.status(200).json({message:"user login successfully",status:true,token:token , user: {
+    _id: user._id,
+    name: user.name
+  } })
 
     }catch(err){
         console.log(err)

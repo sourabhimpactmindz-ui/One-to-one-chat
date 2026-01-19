@@ -1,25 +1,26 @@
 
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { loginuser } from '../service/userservice/userservice'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 const Login = () => {
- const [form , setform] = useState('')
- const navigate = useNavigate()
+  const [form, setform] = useState('')
+  const navigate = useNavigate()
 
   const handleinput = (e) => {
-      setform({...form , [e.target.name] : e.target.value})
+    setform({ ...form, [e.target.name]: e.target.value })
   }
- 
-  const loginhandle = async(e) =>{
-     e.preventDefault()
-    const res = await loginuser(form)
-    const {status,token} = res
 
-    if({status,token}){
+  const loginhandle = async (e) => {
+    e.preventDefault()
+    const res = await loginuser(form)
+    const { status, token } = res
+
+    if ({ status, token }) {
       toast.success("user login successfully")
-      localStorage.setItem('token',token)
+      localStorage.setItem("token", res.token);
+      localStorage.setItem("user", JSON.stringify(res.user));
       navigate('/chat')
     }
     toast.error("user error")
@@ -27,7 +28,7 @@ const Login = () => {
   }
 
   return (
-          <div className="login-page">
+    <div className="login-page">
       <div className="login-container">
         <h2>Login</h2>
 
@@ -40,7 +41,7 @@ const Login = () => {
               placeholder="Enter username"
               value={form.name}
               onChange={handleinput}
-           required />
+              required />
           </div>
 
           <div className="input-group">
@@ -51,7 +52,7 @@ const Login = () => {
               placeholder="Enter password"
               value={form.password}
               onChange={handleinput}
-            required />
+              required />
           </div>
 
           <button type="submit">Login</button>

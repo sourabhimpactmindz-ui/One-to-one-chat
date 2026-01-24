@@ -27,6 +27,8 @@ export const Chatbox = ({ selectedUser, chatId }) => {
       setMessages((prev) => [...prev, msg]);
     });
 
+
+    
     return () => socket.off("receiveMessage");
   }, []);
 
@@ -38,7 +40,6 @@ export const Chatbox = ({ selectedUser, chatId }) => {
     const newMessage = res.newMessage;
 
     setMessages((prev) => [...prev, newMessage]);
-
     socket.emit("sendMessage", {
       message: newMessage,
       receiverId: selectedUser._id,

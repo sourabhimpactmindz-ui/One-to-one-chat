@@ -45,17 +45,18 @@ const Chat = () => {
       console.log(err);
     }
   };
+  
 
   return (
     <div className="chat-container">
-      {/* ===== SIDEBAR ===== */}
+   
       <div className="sidebar">
         <div className="sidebar-header">Chats</div>
 
        
         <Chatlist onSelect={(user) => handleChat(user._id)} />
 
-        {/* OPTIONAL: already existing chats */}
+      
         {Array.isArray(chats) &&
           chats.map((chat) => {
             const otherUser = chat.users?.find(
@@ -77,7 +78,7 @@ const Chat = () => {
           })}
       </div>
 
-      {/* ===== CHATBOX ===== */}
+    
       <Chatbox
         selectedUser={selectedUser}
         chatId={selectedChat?._id}

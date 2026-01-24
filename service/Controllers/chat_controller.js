@@ -40,8 +40,6 @@ export const Acesschat = async(req,res) =>{
 }
 
 
-// login user all chats ==> Frontend 
-
 export const Fetchchat = async(req,res) =>{
     const myId = req.userid
 
